@@ -19,6 +19,7 @@ static char s_num_buffer[4], s_day_buffer[6];
 #define k_centerDotColor  GColorRed
 
 static void bg_update_proc(Layer *layer, GContext *ctx) {
+    // Paint the background
     graphics_context_set_fill_color(ctx, k_backColor);
     graphics_fill_rect(ctx, layer_get_bounds(layer), 0, GCornerNone);
     graphics_context_set_fill_color(ctx, k_frontColor);
@@ -28,8 +29,11 @@ static void bg_update_proc(Layer *layer, GContext *ctx) {
 }
 
 static void hands_update_proc(Layer *layer, GContext *ctx) {
+    // Find the size of the screen
     GRect bounds = layer_get_bounds(layer);
+    // Find the center point
     GPoint center = grect_center_point(&bounds);
+    // Second hand length is 1/2 the width of the screen
     int16_t second_hand_length = bounds.size.w / 2;
 
     time_t now = time(NULL);
